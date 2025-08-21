@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const features = () => {
   return (
-    <div className="mx-[42px] mt-[100px] flex flex-col gap-10.5 justify-items-center">
+    <div id="features" className="mx-[42px] mt-[100px] flex flex-col gap-10.5 justify-items-center">
       <div className="h-15.5 text-4xl font-medium flex flex-col justify-between items-center ">
         <span className="tracking-[1.12px]">Our features</span>
         <Line />

@@ -12,10 +12,12 @@ import Home from "./pages/home.jsx";
 import About from "./pages/about.jsx";
 import SignUp from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
+import Pricing from "./pages/pricing.jsx";
 
 // Layout Components -----
 import Navbar1 from "./components/navbar1.jsx";
 import Navbar2 from "./components/navbar2.jsx";
+import Footer from "./components/footer.jsx";
 
 // Features: BreakEven
 import BreakEven from "./features/BreakEven/BreakEven.jsx";
@@ -36,12 +38,12 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // default false
 
   // Hide navbar on login & signup pages
-  const hideNavbar = location.pathname === "/login" || location.pathname === "/signup";
+   const hideLayout = location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <div>
       {/* Show navbar depending on login status & Hide navbar on login and signup page */}
-      {!hideNavbar &&(isLoggedIn ? <Navbar2 /> : <Navbar1 />)}
+      {!hideLayout &&(isLoggedIn ? <Navbar2 /> : <Navbar1 />)}
 
       <Routes>
         {/* Landing Page (only when not logged in) */}
@@ -72,6 +74,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/pricing" element={<Pricing />} />
 
         {/* Feature: StartupCost */}
         <Route path="/startupcost" element={<StartupCost />} />
@@ -86,6 +89,7 @@ function App() {
         <Route path="/breakeven/result" element={<BreakEvenResult />} />
 
       </Routes>
+      {!hideLayout && <Footer isLoggedIn={isLoggedIn} />}
     </div>
   );
 }
