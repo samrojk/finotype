@@ -96,12 +96,11 @@ const footer = ({ isLoggedIn }) => {
           <span className="text-[#939393] text-[14px] font-normal leading-normal">
             © 2025 Finotype
           </span>
-          <a
+          <Link to="/terms"
             className="text-[#939393] text-[14px] font-normal leading-normal hover:text-[#333] transition-colors duration-200"
-            href="#"
           >
             Terms
-          </a>
+          </Link>
           <a
             className="text-[#939393] text-[14px] font-normal leading-normal hover:text-[#333] transition-colors duration-200"
             href="#"
