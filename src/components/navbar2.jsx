@@ -36,7 +36,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="mx-[42px] mt-6 h-15.5 flex justify-between items-center">
+    <nav id="navbar" className="mx-[42px] mt-6 h-15.5 flex justify-between items-center">
       {/* Logo */}
       <div className="h-15.5 flex items-center">
         <img className="h-15.5 w-15.5" src={Logo} alt="Finotype Logo" />

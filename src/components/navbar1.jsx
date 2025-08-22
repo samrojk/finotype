@@ -14,7 +14,10 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <nav className="mx-[42px] mt-6 h-15.5 flex justify-between items-center">
+    <nav
+      id="navbar"
+      className="mx-[42px] mt-6 h-15.5 flex justify-between items-center"
+    >
       {/* Logo */}
       <div className="h-15.5 flex items-center gap-[-40px]">
         <img className="h-15.5 w-15.5" src={Logo} alt="Finotype Logo" />
@@ -54,7 +57,7 @@ const Navbar = () => {
             }`}
           >
             <Link
-              to="/startupcost"
+              to="/signup"
               className="block w-full px-4 py-2 hover:bg-amber-50 transition-colors duration-180 hover:text-amber-500 cursor-pointer rounded bg-transparent text-left"
             >
               <span className="flex flex-row justify-between items-center mx-1">
@@ -64,7 +67,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/runway"
+              to="/signup"
               className="block w-full px-4 py-2 hover:bg-amber-50 transition-colors duration-180 hover:text-amber-500 cursor-pointer rounded bg-transparent text-left"
             >
               <span className="flex flex-row justify-between items-center mx-1">
@@ -73,7 +76,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/breakeven"
+              to="/signup"
               className="block w-full px-4 py-2 hover:bg-amber-50 transition-colors duration-180 hover:text-amber-500 cursor-pointer rounded bg-transparent text-left"
             >
               <span className="flex flex-row justify-between items-center mx-1">
