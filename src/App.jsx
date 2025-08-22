@@ -14,6 +14,7 @@ import About from "./pages/about.jsx";
 import SignUp from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
 import Pricing from "./pages/pricing.jsx";
+import Terms from "./pages/terms.jsx";
 
 // Layout Components -----
 import Navbar1 from "./components/navbar1.jsx";
@@ -77,6 +78,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/terms" element={<Terms />} />
 
         {/* Feature: StartupCost */}
         <Route path="/startupcost" element={<StartupCost />} />
