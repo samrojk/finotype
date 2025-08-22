@@ -77,7 +77,7 @@ const login = () => {
               {/* Eye toggle button */}
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-6.5 cursor-pointer bg-[#fff7f0] text-[#333] text-xl font-light"
+                className="absolute right-8.5 cursor-pointer bg-[#fff7f0] text-[#333] text-xl font-light"
               >
                 {showPassword ? (
                   <FaRegEyeSlash className="w-[20px] h-[20px] text-[#333] " />

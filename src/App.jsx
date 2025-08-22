@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate, useLocation
+  Navigate,
+  useLocation,
 } from "react-router-dom";
 
 // Main Pages -----
@@ -28,7 +29,7 @@ import Runway from "./features/Runway/Runway.jsx";
 import RunwayResult from "./features/Runway/RunwayResult.jsx";
 
 // Features: StartupCost
-import StartupCost from "./features/StartupCost/StartupCost.jsx"
+import StartupCost from "./features/StartupCost/StartupCost.jsx";
 import StartupResult from "./features/StartupCost/StartupResult.jsx";
 
 function App() {
@@ -38,12 +39,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // default false
 
   // Hide navbar on login & signup pages
-   const hideLayout = location.pathname === "/login" || location.pathname === "/signup";
+  const hideLayout =
+    location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <div>
       {/* Show navbar depending on login status & Hide navbar on login and signup page */}
-      {!hideLayout &&(isLoggedIn ? <Navbar2 /> : <Navbar1 />)}
+      {!hideLayout && (isLoggedIn ? <Navbar2 /> : <Navbar1 />)}
 
       <Routes>
         {/* Landing Page (only when not logged in) */}
@@ -87,7 +89,6 @@ function App() {
         {/* Feature: BreakEven */}
         <Route path="/breakeven" element={<BreakEven />} />
         <Route path="/breakeven/result" element={<BreakEvenResult />} />
-
       </Routes>
       {!hideLayout && <Footer isLoggedIn={isLoggedIn} />}
     </div>
