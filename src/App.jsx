@@ -20,6 +20,7 @@ import Terms from "./pages/terms.jsx";
 import Navbar1 from "./components/navbar1.jsx";
 import Navbar2 from "./components/navbar2.jsx";
 import Footer from "./components/footer.jsx";
+import Notification from "./components/notification.jsx";
 
 // Features: BreakEven
 import BreakEven from "./features/BreakEven/BreakEven.jsx";
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div>
+      <Notification/>
       {/* Show navbar depending on login status & Hide navbar on login and signup page */}
       {!hideLayout && (isLoggedIn ? <Navbar2 /> : <Navbar1 />)}
 
