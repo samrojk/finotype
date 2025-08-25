@@ -38,7 +38,7 @@ function App() {
   const location = useLocation();
 
   // Check Login to show particular Navbar
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // default false
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // default false
 
   // Hide navbar on login & signup pages
   const hideLayout =
