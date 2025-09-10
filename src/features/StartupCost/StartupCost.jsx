@@ -1,7 +1,6 @@
 import React from 'react'
 import Line from '../../assets/Line';
 import StartupForm from './StartupForm';
-import StartupResult from './StartupResult';
 
 
 const StartupCost = () => {
@@ -16,7 +15,7 @@ const StartupCost = () => {
         <Line />
       </div>
     </div>
-      <StartupResult/>
+      <StartupForm/>
     </>
   )
 }
