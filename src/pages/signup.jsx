@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../assets/ft-black.png";
+import Logo from "../assets/ft-black.webp";
 import { FcGoogle } from "react-icons/fc";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { Link } from "react-router-dom";

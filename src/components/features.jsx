@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import Line from "../assets/Line";
-import Feature1 from "../assets/feature-1.jpg";
-import Feature2 from "../assets/feature-2.jpg";
-import Feature3 from "../assets/feature-3.jpg";
+import Feature1 from "../assets/feature-1.webp";
+import Feature2 from "../assets/feature-2.webp";
+import Feature3 from "../assets/feature-3.webp";
 import { Link } from "react-router-dom";
 
 const features = () => {

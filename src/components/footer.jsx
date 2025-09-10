@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../assets/ft-black.png";
+import Logo from "../assets/ft-black.webp";
 import { FaTwitter } from "react-icons/fa";
 import { IoLogoFacebook } from "react-icons/io";
 import { IoLogoGithub } from "react-icons/io5";

@@ -3,8 +3,8 @@ import Line from "../assets/Line";
 import { IoLogoGithub } from "react-icons/io5";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
-import Profile1 from "../assets/profile1.jpeg";
-import Profile2 from "../assets/profile2.png";
+import Profile1 from "../assets/profile1.webp";
+import Profile2 from "../assets/profile2.webp";
 
 const contibutors = () => {
   return (
