@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { account } from "./lib/appwrite"; // ✅ Add Appwrite
 
 // Main Pages -----
 import Landing from "./pages/landing.jsx";
@@ -38,7 +34,20 @@ function App() {
   const location = useLocation();
 
   // Check Login to show particular Navbar
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // default false
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // default false
+
+  // ✅ Check login session on refresh
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const user = await account.get(); // fetch user from Appwrite
+        if (user) setIsLoggedIn(true);
+      } catch {
+        setIsLoggedIn(false);
+      }
+    };
+    checkSession();
+  }, []);
 
   // Hide navbar on login & signup pages
   const hideLayout =
@@ -46,9 +55,10 @@ function App() {
 
   return (
     <div>
-      <Notification/>
+      <Notification />
       {/* Show navbar depending on login status & Hide navbar on login and signup page */}
-      {!hideLayout && (isLoggedIn ? <Navbar2 /> : <Navbar1 />)}
+      {!hideLayout &&
+        (isLoggedIn ? <Navbar2 setIsLoggedIn={setIsLoggedIn} /> : <Navbar1 />)}
 
       <Routes>
         {/* Landing Page (only when not logged in) */}
@@ -77,8 +87,15 @@ function App() {
 
         {/* Other pages */}
         <Route path="/about" element={<About />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/signup"
+          element={<SignUp setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route
+          path="/login"
+          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+        />
+
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/terms" element={<Terms />} />
 

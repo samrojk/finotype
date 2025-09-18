@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/ft-black.webp";
-import Profile1 from "../assets/profile1.webp";
+import Profile from "../assets/profile1.webp";
 import {
   FaChevronDown,
   FaMoneyBill1Wave,
@@ -11,13 +11,15 @@ import {
 } from "react-icons/fa6";
 import { PiLinkBreakBold } from "react-icons/pi";
 import { Link, NavLink } from "react-router-dom";
+import { account } from "../lib/appwrite";
 
-const Navbar = () => {
+const Navbar = ({ setIsLoggedIn }) => {
   // Dropdown for Our Features
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Dropdown for Profile
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -35,8 +37,58 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchUserAvatar = async () => {
+      try {
+        const user = await account.get();
+
+        // check if user already has avatar seed
+        let seed = user.prefs.avatarSeed;
+
+        if (!seed) {
+          // generate random seed once
+          seed = Math.floor(Math.random() * 10000).toString();
+          await account.updatePrefs({ avatarSeed: seed });
+        }
+
+        // generate avatar URL with DiceBear "notionists" (professional style)
+        setAvatarUrl(
+          `https://api.dicebear.com/7.x/notionists/svg?seed=${seed}&backgroundColor=ffdfbf`
+        );
+      } catch (err) {
+        console.error("Failed to fetch avatar:", err);
+      }
+    };
+
+    fetchUserAvatar();
+  }, []);
+
+  const handleEditProfile = async () => {
+    try {
+      const newSeed = Math.floor(Math.random() * 10000).toString();
+      await account.updatePrefs({ avatarSeed: newSeed });
+      setAvatarUrl(
+        `https://api.dicebear.com/7.x/notionists/svg?seed=${newSeed}&backgroundColor=ffdfbf`
+      );
+    } catch (error) {
+      console.error("Failed to update avatar:", error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await account.deleteSession("current"); // end session
+      setIsLoggedIn(false); // update parent App.jsx state
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
-    <nav id="navbar" className="mx-[42px] mt-6 h-15.5 flex justify-between items-center">
+    <nav
+      id="navbar"
+      className="mx-[42px] mt-6 h-15.5 flex justify-between items-center"
+    >
       {/* Logo */}
       <div className="h-15.5 flex items-center">
         <img className="h-15.5 w-15.5" src={Logo} alt="Finotype Logo" />
@@ -128,7 +180,7 @@ const Navbar = () => {
           title={isOnline ? "You're Online" : "You're Offline"}
         >
           <img
-            src={Profile1}
+            src={avatarUrl || Profile}
             alt="profile pic"
             className="h-[48px] rounded-full ring-2 ring-gray-200 ring-offset-2"
           />
@@ -162,22 +214,23 @@ const Navbar = () => {
         {isProfileOpen && (
           <div className="absolute bg-white shadow-md rounded-2xl mt-[60px] w-46 z-40">
             <Link
-              to="/editprofile"
+              // to="/editprofile"
+              onClick={handleEditProfile}
               className="w-full block px-4 py-2 hover:bg-amber-50 hover:text-amber-500 rounded-t-2xl transition-colors duration-180 bg-transparent text-left cursor-pointer"
             >
               <span className="flex flex-row justify-between items-center mx-1">
-                Edit Profile <FaUserPen size={20} className="mt-[3.5px]" />
+                Change Avatar <FaUserPen size={20} className="mt-[3.5px]" />
               </span>
             </Link>
 
-            <Link
-              to="/logout"
+            <button
+              onClick={handleLogout}
               className="w-full block px-4 py-2 hover:bg-blue-50 hover:text-blue-500 rounded transition-colors duration-180 bg-transparent text-left cursor-pointer"
             >
               <span className="flex flex-row justify-between items-center mx-1">
                 Log Out <FaUserMinus size={20} className="mt-[3.5px]" />
               </span>
-            </Link>
+            </button>
 
             <Link
               to="/deleteacc"
