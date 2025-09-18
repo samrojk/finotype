@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/ft-black.webp";
-import Profile from "../assets/profile1.webp";
+import Profile from "../assets/profile.webp";
 import {
   FaChevronDown,
   FaMoneyBill1Wave,
