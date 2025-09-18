@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/ft-black.webp";
+import DeleteModal from "./delmodal.jsx";
 import Profile from "../assets/profile.webp";
 import {
   FaChevronDown,
@@ -20,6 +21,9 @@ const Navbar = ({ setIsLoggedIn }) => {
   // Dropdown for Profile
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
+
+  // Delete Account Modal
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -81,6 +85,18 @@ const Navbar = ({ setIsLoggedIn }) => {
       setIsLoggedIn(false); // update parent App.jsx state
     } catch (error) {
       console.error("Logout failed:", error);
+    }
+  };
+
+  // Delete Account Trigger
+  const handleDeleteAccount = async () => {
+    try {
+      await account.delete(); // delete account from Appwrite
+      setIsLoggedIn(false);
+      setIsDeleteOpen(false);
+      window.location.href = "/"; // redirect after deletion
+    } catch (error) {
+      console.error("Delete account failed:", error);
     }
   };
 
@@ -232,17 +248,22 @@ const Navbar = ({ setIsLoggedIn }) => {
               </span>
             </button>
 
-            <Link
-              to="/deleteacc"
+            <button
+              onClick={() => setIsDeleteOpen(true)}
               className="w-full block px-4 py-2 hover:bg-red-100 hover:text-red-500 rounded-b-2xl transition-colors duration-180 bg-transparent text-left cursor-pointer"
             >
               <span className="flex flex-row justify-between items-center mx-1">
                 Delete Account <FaUserXmark size={20} className="mt-[3.5px]" />
               </span>
-            </Link>
+            </button>
           </div>
         )}
       </div>
+      <DeleteModal
+        isOpen={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+        onConfirm={handleDeleteAccount}
+      />
     </nav>
   );
 };
