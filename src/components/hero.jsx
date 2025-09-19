@@ -3,6 +3,7 @@ import HeroImg from "../assets/hero-image.webp";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const hero = () => {
   return (
@@ -10,7 +11,13 @@ const hero = () => {
       {/* hero section__________ */}
       <div className="h-180 gap-6 flex justify-between items-center">
         {/* hero text __________________ */}
-        <div className="w-168 h-152.5 flex flex-col items-start gap-13 shrink-0">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="w-168 h-152.5 flex flex-col items-start gap-13 shrink-0"
+        >
           {/* hero text____________________ */}
           <div className="w-156 h-88 flex flex-col items-start gap-[14px] self-stretch">
             {/* see demo video_____ */}
@@ -19,7 +26,7 @@ const hero = () => {
                 Want to know what finotype is?
               </p>
 
-              <button className="group bg-[#F3E6DD] text-[#1E1E1E] flex w-22 h-8 px-[18px] flex-col justify-between items-center  rounded-[100px] hover:bg-[#E7D0BE] transition-colors duration-200 in-hover:">
+              <button className="group bg-[#F3E6DD] text-[#1E1E1E] flex w-22 h-8 px-[18px] flex-col justify-between items-center  rounded-[100px] hover:bg-[#E7D0BE] transition-colors duration-200">
                 <a href="https://www.youtube.com/" target="_blank">
                   <span className="flex justify-center items-center gap-0.5">
                     <span className="text-[#000] text-[14px] font-normal leading-[32px] flex justify-center items-center">
@@ -62,12 +69,17 @@ const hero = () => {
               />
             </span>
           </Link>
-        </div>
+        </motion.div>
 
         {/* hero image */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <img className="h-178" src={HeroImg} alt="Hero Image" />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
