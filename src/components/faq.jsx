@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Line from "../assets/Line";
 import { FaPlus } from "react-icons/fa6";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -40,11 +41,14 @@ export default function FAQCard() {
       </div>
 
       {/* FAQ table__________ */}
-
       <div className="flex flex-col justify-items-center gap-6">
         {faqs.map((faq, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
             className={`transition-all duration-300 border-[#D5D5D5] ${
               openIndex === index
                 ? "bg-[#FFF8F2] h-40"
@@ -52,18 +56,29 @@ export default function FAQCard() {
             } w-[800px] px-10 py-5.25 flex flex-col justify-center items-center self-stretch rounded-[40px]`}
           >
             <div
-              className="w-183 h-28.5 flex justify-between items-center cursor-pointer "
+              className="w-183 h-28.5 flex justify-between items-center cursor-pointer"
               onClick={() => toggle(index)}
             >
               <div className="w-162.25 h-28.5 flex flex-col justify-center items-start shrink-0 gap-3">
                 <p className="w-162.25 h-9 text-[#333333] text-2xl font-medium ">
                   {faq.question}
                 </p>
-                {openIndex === index && (
-                  <p className="w-162.25 h-16.5 text-[#939393] text-[22px] font-normal">
-                    {faq.answer}
-                  </p>
-                )}
+
+                {/* Animate the answer expanding */}
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.p
+                      key="answer"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="w-162.25 text-[#939393] text-[22px] font-normal overflow-hidden"
+                    >
+                      {faq.answer}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Toggle Icon */}
@@ -87,7 +102,7 @@ export default function FAQCard() {
                 )}
               </span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
